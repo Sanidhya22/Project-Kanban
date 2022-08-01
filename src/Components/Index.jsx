@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Columns";
+import { Div, Headerdiv, Maindiv } from "./StyledComponenets";
 
 const reorderColumnList = (sourceCol, startIndex, endIndex) => {
   const newTaskIds = Array.from(sourceCol.taskIds);
@@ -84,19 +85,19 @@ export default function Home() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
-        <div>
+        <Headerdiv>
           <h1>React Beautiful Drag and Drop</h1>
           <p>react-beautiful-dnd</p>
-        </div>
+        </Headerdiv>
 
-        <div justify="space-between" px="4rem">
+        <Div justify="space-between" px="4rem">
           {state.columnOrder.map((columnId) => {
             const column = state.columns[columnId];
             const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
 
             return <Column key={column.id} column={column} tasks={tasks} />;
           })}
-        </div>
+        </Div>
       </div>
     </DragDropContext>
   );
@@ -127,7 +128,12 @@ const initialData = {
       title: "COMPLETED",
       taskIds: [],
     },
+    "column-4": {
+      id: "column-4",
+      title: "COMPLETED2",
+      taskIds: [],
+    },
   },
   // Facilitate reordering of the columns
-  columnOrder: ["column-1", "column-2", "column-3"],
+  columnOrder: ["column-1", "column-2", "column-3", "column-4"],
 };
